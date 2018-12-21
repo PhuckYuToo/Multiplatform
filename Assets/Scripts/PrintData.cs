@@ -17,14 +17,12 @@ public class PrintData {
 			for(int i = 0; i < it.Length; ++i) data.Add(it[i].ToString());
 			return;
 		}
-
 		//Lists
 		if(input is IList) {
 			IList it = input as IList;
 			for(int i = 0; i < it.Count; ++i) data.Add(it[i].ToString());
 			return;
 		}
-
 		data.Add(input.ToString());
 	}
 

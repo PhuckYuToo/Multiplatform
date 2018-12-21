@@ -7,7 +7,7 @@ public class Level : MonoBehaviour {
 
 	public PrintManager printManager;
 
-	PrintData printableData = new PrintData(42);
+	private PrintData printableData = new PrintData(42);
 
 	void Awake () {
 		printManager = new PrintManager();
@@ -27,6 +27,6 @@ public class Level : MonoBehaviour {
 	}
 	
 	void Update () {
-		printManager.Print(printableData);
+		//if(Input.GetKeyUp(KeyCode.Space)) printManager.Print(printableData);
 	}
 }

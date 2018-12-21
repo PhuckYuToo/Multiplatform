@@ -4,9 +4,8 @@ using UnityEngine;
 using System;
 
 public class PrintManager {
-	
 	//The printer being used
-	private IPrintable printer = new IDebugPrinter();
+	private IPrintable printer = new IAdafruitPrinter();
 	
 	public void Print(PrintData pd) {
 		if(printer.IsDone()) printer.Print(pd);
