@@ -6,9 +6,12 @@ using System.IO.Ports;
 public interface IPrintable {
 	void Print(PrintData pd);
 	bool IsDone();
+	bool Assign(Printer.Port port);
 }
 
 public class IDebugPrinter : IPrintable {
+	public bool Assign(Printer.Port port) {return true;}
+
 	public void Print(PrintData pd) {
 		string fin = "";
 		for(int i = 0; i < pd.GetData().Count; ++i) fin += (i < pd.GetData().Count - 1) ? (pd.GetData()[i] + ", ") : (pd.GetData()[i]);
@@ -23,10 +26,18 @@ public class IDebugPrinter : IPrintable {
 public class IAdafruitPrinter : IPrintable {
 	private SerialPort stream;
 
-	public IAdafruitPrinter() {
-		stream = new SerialPort("COM3", 19200);
+	public  bool Assign(Printer.Port port) {
+		bool succes = false;
+		stream = new SerialPort(port.ToString(), 19200);
 		stream.ReadTimeout = 50;
-		stream.Open();
+		try {
+			stream.Open();
+			succes = true;
+		} catch(System.IO.IOException) {
+			Debug.LogWarning("Couldn't find printer on port " + port.ToString() + ", assigning default Debug Printer instead!");
+			succes = false;
+		}
+		return succes;
 	}
 
 	public void Print(PrintData pd) {

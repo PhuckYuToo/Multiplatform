@@ -11,7 +11,7 @@ public class UI : MonoBehaviour {
 	private GameObject input;
 	private InputField field;
 
-	public Level level;
+	public Printer printManager;
 
 	void Start () {
 		basePos = transform.localPosition;
@@ -32,7 +32,7 @@ public class UI : MonoBehaviour {
 		}
 
 		if(input.activeSelf && field.text.Length > 0 && Input.GetKeyDown(KeyCode.Return)) {
-			level.printManager.Print(new PrintData(field.text));
+			printManager.Print(new PrintData(field.text));
 			field.text = "";
 		}
 	}
