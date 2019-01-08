@@ -16,7 +16,7 @@ public class IDebugPrinter : IPrintable {
 	}
 
 	public bool IsDone() {
-		return Random.Range(0f, 1f) < 0.5f;
+		return true;
 	}
 }
 

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+//Facade Pattern
 public class PrintManager {
-	//The printer being used
+
 	private IPrintable printer = new IAdafruitPrinter();
 	
 	public void Print(PrintData pd) {
