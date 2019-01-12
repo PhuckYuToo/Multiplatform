@@ -1,36 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 
 public class PrintData {
-	protected List<String> data = new List<String>();
+	protected List<string> data = new List<string>();
 
-	public PrintData(System.Object input) {
-		ParseData(input);
-	}
+    public PrintData() { }
+	public PrintData(object input) { ParseData(input); }
+	public void Append(object input) { ParseData(input); }
+	public List<string> GetData() { return data; }
 
-	private void ParseData(System.Object input) {
-		//Arrays
-		if(input.GetType() == typeof(Single[])) {
-			Single[] it = input as Single[];
-			for(int i = 0; i < it.Length; ++i) data.Add(it[i].ToString());
-			return;
-		}
-		//Lists
-		if(input is IList) {
-			IList it = input as IList;
-			for(int i = 0; i < it.Count; ++i) data.Add(it[i].ToString());
-			return;
-		}
-		data.Add(input.ToString());
-	}
+    private void ParseData(object input) {
+        if (input.GetType() == typeof(float[])) {
+            float[] it = input as float[];
+            for (int i = 0; i < it.Length; ++i) data.Add(it[i].ToString());
+            return;
+        }
+        if (input is IList) {
+            IList it = input as IList;
+            for (int i = 0; i < it.Count; ++i) data.Add(it[i].ToString());
+            return;
+        }
+        data.Add(input.ToString());
+    }
 
-	public void Append(System.Object input) {
-		ParseData(input);
-	}
-
-	public List<string> GetData() {
-		return data;
-	}
 }

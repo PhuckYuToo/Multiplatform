@@ -1,27 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UI : MonoBehaviour {
+    [SerializeField]
+	private GameObject input;
+
 	private Vector2 basePos;
+	private InputField field;
+	private Text text;
 	private float time = 0;
 
-	private Text text;
-	private GameObject input;
-	private InputField field;
+    private void Awake() {
+        text = GetComponent<Text>();
+        field = input.GetComponent<InputField>();
+    }
 
-	public Printer printManager;
-
-	void Start () {
+    private void Start () {
 		basePos = transform.localPosition;
-		text = GetComponent<Text>();
-		input = GameObject.Find("InputField");
-		field = input.GetComponent<InputField>();
 		input.SetActive(false);
 	}
 	
-	void Update () {
+	private void FixedUpdate () {
 		time += Time.deltaTime;
 		transform.localPosition = new Vector2(transform.localPosition.x, basePos.y + Mathf.Sin(Time.time * 5) * 4);
 	
@@ -32,7 +31,7 @@ public class UI : MonoBehaviour {
 		}
 
 		if(input.activeSelf && field.text.Length > 0 && Input.GetKeyDown(KeyCode.Return)) {
-			printManager.Print(new PrintData(field.text));
+			Printer.Print(new PrintData(field.text));
 			field.text = "";
 		}
 	}
