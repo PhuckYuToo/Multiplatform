@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 public class PaintCanvas : MonoBehaviour {
@@ -18,7 +19,7 @@ public class PaintCanvas : MonoBehaviour {
 
     private List<GameObject> moves = new List<GameObject>();
 
-    void Update () {
+    private void Update () {
         if (Input.GetMouseButton(0) && moves.Count < moveLimit) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -56,11 +57,14 @@ public class PaintCanvas : MonoBehaviour {
     private IEnumerator DoSave() {
         yield return null;
         RenderTexture.active = renTex;
-        Texture2D tex = new Texture2D(renTex.width, renTex.height);
+        Texture2D tex = new Texture2D(renTex.height, renTex.width);
         tex.ReadPixels(new Rect(0, 0, tex.width, tex.height), 0, 0);
         tex.Apply();
-
-        byte[] data = tex.EncodeToJPG();
-        File.WriteAllBytes(Application.dataPath + "/SavedImages/PAINTING.jpg", data);
+        byte[] data = tex.EncodeToPNG();
+        StringBuilder hex = new StringBuilder(data.Length * 2);
+        foreach (byte b in data) {
+            hex.AppendFormat("0x" + "{0:x2}" + ",", b);
+        }
+        File.WriteAllText(Application.dataPath + "/bmp.txt", hex.ToString());
     }
 }
