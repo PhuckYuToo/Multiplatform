@@ -11,7 +11,7 @@ public class PaintCanvas : MonoBehaviour {
     [SerializeField]
     private RenderTexture renTex;
     [SerializeField]
-    private float brushSize = 0.1f;
+    private float brushSize = 0.03f;
     [SerializeField]
     private int moveLimit = 1000;
     [SerializeField]
@@ -65,6 +65,6 @@ public class PaintCanvas : MonoBehaviour {
         foreach (byte b in data) {
             hex.AppendFormat("0x" + "{0:x2}" + ",", b);
         }
-        File.WriteAllText(Application.dataPath + "/bmp.txt", hex.ToString());
+        File.WriteAllBytes(Application.dataPath + "/bmp.png", data);
     }
 }

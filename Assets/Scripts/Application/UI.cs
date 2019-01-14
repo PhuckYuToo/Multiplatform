@@ -31,10 +31,7 @@ public class UI : MonoBehaviour {
 		}
 
 		if(input.activeSelf && field.text.Length > 0 && Input.GetKeyDown(KeyCode.Return)) {
-            PrintData data = new PrintData();
-            char[] chars = { 'C', 'B', 'A', 'G', 'H', 'P' };
-            data.Append(chars);
-			Printer.Print(data);
+			Printer.Print(new PrintData(field.text));
 			field.text = "";
 		}
 	}
