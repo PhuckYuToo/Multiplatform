@@ -1,15 +1,15 @@
-﻿public enum Port {
-    COM1,
-    COM2,
-    COM3,
-    COM4,
-    COM5,
-    COM6,
-    COM7,
-    COM11
-}
+﻿namespace CustomPrinter {
+    public enum Port {
+        COM1,
+        COM2,
+        COM3,
+        COM4,
+        COM5,
+        COM6,
+        COM7,
+        COM11
+    }
 
-namespace CustomPrinter {
     public static class Printer {
         private static IPrintable printer;
 
