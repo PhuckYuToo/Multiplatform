@@ -60,11 +60,12 @@ public class PaintCanvas : MonoBehaviour {
         Texture2D tex = new Texture2D(renTex.height, renTex.width);
         tex.ReadPixels(new Rect(0, 0, tex.width, tex.height), 0, 0);
         tex.Apply();
+
+        /* DISCLAIMER: BMP Conversion doesn't work quite work yet! 
+         * This is just WIP code that's not part of the system */
         byte[] data = tex.EncodeToPNG();
         StringBuilder hex = new StringBuilder(data.Length * 2);
-        foreach (byte b in data) {
-            hex.AppendFormat("0x" + "{0:x2}" + ",", b);
-        }
+        foreach (byte b in data) hex.AppendFormat("0x" + "{0:x2}" + ",", b);
         File.WriteAllBytes(Application.dataPath + "/bmp.png", data);
     }
 }

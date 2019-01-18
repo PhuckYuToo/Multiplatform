@@ -22,5 +22,4 @@ public class PrintData {
         }
         data.Add(input.ToString());
     }
-
 }
