@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using CustomPrinter;
 
 public class UI : MonoBehaviour {
     [SerializeField]

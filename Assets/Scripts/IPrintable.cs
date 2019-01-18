@@ -1,4 +1,6 @@
-﻿public interface IPrintable {
-	void Print(PrintData pd);
-	void Assign(Port port);
+﻿namespace CustomPrinter {
+    public interface IPrintable {
+        void Print(PrintData pd);
+        void Assign(Port port);
+    }
 }

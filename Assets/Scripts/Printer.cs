@@ -9,19 +9,21 @@
     COM11
 }
 
-public static class Printer {
-    private static IPrintable printer;
+namespace CustomPrinter {
+    public static class Printer {
+        private static IPrintable printer;
 
-    public static void Init() {
-        printer = new DebugPrinter();
+        public static void Init() {
+            printer = new DebugPrinter();
+        }
+
+        public static void Init(Port port) {
+            printer = new AdafruitPrinter();
+            printer.Assign(port);
+        }
+
+        public static void Print(PrintData pd) {
+            printer.Print(pd);
+        }
     }
-
-	public static void Init(Port port) {
-        printer = new AdafruitPrinter();
-        printer.Assign(port);
-	}
-	
-	public static void Print(PrintData pd) {
-		printer.Print(pd);
-	}
 }
